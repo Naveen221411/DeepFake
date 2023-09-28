@@ -1,0 +1,35 @@
+Instructions :
+1.Open the following link  https://colab.google/
+2.Click on new notebook it will redirect to the google colab page
+3.Sign in with your gmail account
+4.Now click on connect it will connects to the google colab page
+5.click on folders and click on mount drive it will connects with your google drive
+6.Run all the 3 files below in google colab it will take sometime to execute
+7.Now in this *Deepfake* you want to replace your video at this location **/content/bryan.mp4**
+8.And also replace what face you want to replace at this loaction **/content/tom.jpg**
+9.After you run all the below codes you will get DeepFake video like named as *swapped.mp4* 
+10.Finally  download the deepfaked video  
+
+
+*Clone roop repo and install dependencies*
+→ !git clone https://github.com/s0md3v/roop.git
+  %cd roop
+  !pip install -r requirements.txt
+
+ *download model*
+→  !wget https://huggingface.co/ezioruan/inswapper_128.onnx/resolve/main/inswapper_128.onnx -O inswapper_128.onnx
+   !mkdir models
+   !mv inswapper_128.onnx ./models
+
+  *GPU support*
+→ !pip uninstall onnxruntime onnxruntime-gpu -y
+!pip install torch torchvision torchaudio --force-reinstall --index-url https://download.pytorch.org/whl/cu118
+!pip install onnxruntime-gpu
+
+*Deepfake*
+→!python run.py --target /content/bryan.mp4  --source /content/tom.jpg -o /content/swapped.mp4 --execution-provider cuda --frame-processor face_swapper face_enhancer
+
+
+
+
+Reference from Youtube:- ComputersAdda
